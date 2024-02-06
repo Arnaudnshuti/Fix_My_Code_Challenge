@@ -1,0 +1,178 @@
+#include <string.h>
+#include <stdlib.h>
+#include "lists.h"
+
+/**
+ * add_dnodeint_end - Add a node at the end of a list
+ *
+ * @head: The address of the pointer to the first element of the list
+ * @n: The number to store in the new element
+ *
+ * Return: A pointer to the new element
+ */
+dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
+{
+	dlistint_t *new;
+	dlistint_t *l;
+
+	new = malloc(sizeof(dlistint_t));
+	if (new == NULL)
+	{
+		return (NULL);
+	}
+	new->n = n;
+	new->next = NULL;
+	if (*head == NULL)
+	{
+		*head = new;
+		new->prev = NULL;
+		return (new);
+	}
+	l = *head;
+	while (l->next != NULL)
+	{
+		l = l->next;
+	}
+	l->next = new;
+	new->prev = l;
+	return (new);
+}
+#ifndef _LISTS_H_
+#define _LISTS_H_
+
+#include <stddef.h>
+
+/**
+ * struct dlistint_s - doubly linked list
+ * @n: integer
+ * @prev: points to the prev node
+ * @next: points to the next node
+ *
+ * Description: doubly linked list node structure
+ * for Holberton project
+ */
+typedef struct dlistint_s
+{
+	int n;
+	struct dlistint_s *prev;
+	struct dlistint_s *next;
+} dlistint_t;
+
+size_t print_dlistint(const dlistint_t *h);
+dlistint_t *add_dnodeint_end(dlistint_t **head, const int n);
+int delete_dnodeint_at_index(dlistint_t **head, unsigned int index);
+void free_dlistint(dlistint_t *head);
+
+#endif
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include "lists.h"
+
+/**
+ * main - check the code for Holberton School students.
+ *
+ * Return: Always EXIT_SUCCESS.
+ */
+int main(void)
+{
+	dlistint_t *head;
+
+	head = NULL;
+	add_dnodeint_end(&head, 0);
+	add_dnodeint_end(&head, 1);
+	add_dnodeint_end(&head, 2);
+	add_dnodeint_end(&head, 3);
+	add_dnodeint_end(&head, 4);
+	add_dnodeint_end(&head, 98);
+	add_dnodeint_end(&head, 402);
+	add_dnodeint_end(&head, 1024);
+	print_dlistint(head);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 5);
+	print_dlistint(head);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	print_dlistint(head);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	print_dlistint(head);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	print_dlistint(head);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	print_dlistint(head);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	print_dlistint(head);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	print_dlistint(head);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	printf("-----------------\n");
+	delete_dnodeint_at_index(&head, 0);
+	print_dlistint(head);
+	free_dlistint(head);
+	return (0);
+}
+#include <stdio.h>
+#include "lists.h"
+
+/**
+ * print_dlistint - Prints a doubly linkedlist of integers
+ *
+ * @h: A pointer to the first element of a list
+ *
+ * Return: The number of element printed
+ */
+size_t print_dlistint(const dlistint_t *h)
+{
+	size_t n;
+
+	n = 0;
+	while (h)
+	{
+		printf("%d\n", h->n);
+		h = h->next;
+		n++;
+	}
+	return (n);
+}
+#include <string.h>
+#include <stdlib.h>
+#include "lists.h"
+
+/**
+ * free_dlistint - Free a list
+ *
+ * @head: A pointer to the first element of the list
+ */
+void free_dlistint(dlistint_t *head)
+{
+	dlistint_t *node;
+
+	while (head)
+	{
+		node = head;
+		head = head->next;
+		free(node);
+	}
+}
